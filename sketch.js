@@ -34,9 +34,20 @@ function draw() {
       let col = video.get(i, j);
       graphics.fill(col);
       graphics.noStroke();
-      graphics.ellipse(i, j, 15, 15); // 繪製圓形
+      graphics.rect(i, j, 18, 18); // 繪製方框
+
+      // 在方框中間繪製黑色圓
+      graphics.fill(0);
+      graphics.ellipse(i + 9, j + 9, 5, 5); // 圓心位於方框中心
     }
   }
+
+  // 翻轉畫布以修正左右顛倒的 graphics
+  push();
+  translate(width, 0); // 將畫布的原點移到右上角
+  scale(-1, 1); // 水平翻轉畫布
+  image(graphics, -x - videoWidth, y, videoWidth, videoHeight);
+  pop();
 
   // 翻轉畫布以修正左右顛倒的影像
   push();
@@ -44,9 +55,6 @@ function draw() {
   scale(-1, 1); // 水平翻轉畫布
   image(video, x, y, videoWidth, videoHeight);
   pop();
-
-  // 在視訊畫面上方顯示圖形
-  image(graphics, x, y, videoWidth, videoHeight);
 }
 
 function windowResized() {
