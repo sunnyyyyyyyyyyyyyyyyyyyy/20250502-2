@@ -1,4 +1,5 @@
 let video;
+let graphics;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -8,6 +9,10 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(windowWidth, windowHeight);
   video.hide(); // 隱藏原始的 HTML 視訊元素
+
+  // 建立與視訊畫面相同大小的圖形緩衝區
+  graphics = createGraphics(windowWidth, windowHeight);
+  graphics.background(0); // 設定圖形的背景為黑色
 }
 
 function draw() {
@@ -21,11 +26,31 @@ function draw() {
   let x = (width - videoWidth) / 2;
   let y = (height - videoHeight) / 2;
 
-  // 繪製攝影機影像
+  // 更新 graphics 的內容
+  graphics.background(0); // 重設背景為黑色
+  for (let i = 0; i < graphics.width; i += 20) {
+    for (let j = 0; j < graphics.height; j += 20) {
+      // 從 video 中取得相對應位置的顏色
+      let col = video.get(i, j);
+      graphics.fill(col);
+      graphics.noStroke();
+      graphics.ellipse(i, j, 15, 15); // 繪製圓形
+    }
+  }
+
+  // 翻轉畫布以修正左右顛倒的影像
+  push();
+  translate(width, 0); // 將畫布的原點移到右上角
+  scale(-1, 1); // 水平翻轉畫布
   image(video, x, y, videoWidth, videoHeight);
+  pop();
+
+  // 在視訊畫面上方顯示圖形
+  image(graphics, x, y, videoWidth, videoHeight);
 }
 
 function windowResized() {
   // 當視窗大小改變時，重新調整畫布大小
   resizeCanvas(windowWidth, windowHeight);
+  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小
 }
