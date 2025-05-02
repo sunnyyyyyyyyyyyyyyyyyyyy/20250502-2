@@ -30,18 +30,19 @@ function draw() {
   graphics.background(0); // 重設背景為黑色
   for (let i = 0; i < graphics.width; i += 20) {
     for (let j = 0; j < graphics.height; j += 20) {
-      // 從 video 中取得相對應位置的顏色
       let col = video.get(i, j);
       graphics.fill(col);
       graphics.noStroke();
-      graphics.ellipse(i, j, 15, 15); // 繪製圓形
+      graphics.rect(i, j, 18, 18);
+      graphics.fill(0);
+      graphics.ellipse(i + 9, j + 9, 5, 5);
     }
   }
 
   // 翻轉畫布以修正左右顛倒的影像
   push();
-  translate(width, 0); // 將畫布的原點移到右上角
-  scale(-1, 1); // 水平翻轉畫布
+  translate(width, 0);
+  scale(-1, 1);
   image(video, x, y, videoWidth, videoHeight);
   pop();
 
@@ -50,7 +51,6 @@ function draw() {
 }
 
 function windowResized() {
-  // 當視窗大小改變時，重新調整畫布大小
   resizeCanvas(windowWidth, windowHeight);
-  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小
+  graphics.resizeCanvas(windowWidth, windowHeight);
 }
