@@ -32,7 +32,11 @@ function draw() {
     for (let j = 0; j < graphics.height; j += 20) {
       // 從 video 中取得相對應位置的顏色
       let col = video.get(i, j);
-      graphics.fill(col);
+      let r = red(col);
+      let g = green(col);
+      let b = blue(col);
+      let gray = (r + g + b) / 3; // 計算灰階值
+      graphics.fill(gray); // 使用灰階值作為方框顏色
       graphics.noStroke();
       graphics.rect(i, j, 18, 18); // 繪製方框
 
