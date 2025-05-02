@@ -32,33 +32,25 @@ function draw() {
     for (let j = 0; j < graphics.height; j += 20) {
       // 從 video 中取得相對應位置的顏色
       let col = video.get(i, j);
-      graphics.fill(col); // 使用相對應位置的顏色作為方框顏色); // 使用相對應位置的顏色作為方框顏色); // 使用相對應位置的顏色作為方框顏色); // 使用相對應位置的顏色作為方框顏色); // 使用相對應位置的顏色作為方框顏色
-      graphics.noStroke();;;;;
-      graphics.rect(i, j, 18, 18); // 繪製方框, 18, 18); // 繪製方框, 18, 18); // 繪製方框, 18, 18); // 繪製方框, 18, 18); // 繪製方框
-
-      // 在方框中間繪製黑色圓
-      graphics.fill(0); // 黑色 黑色 黑色 黑色 黑色
-      graphics.ellipse(i + 9, j + 9, 5, 5); // 圓心位於方框中心; // 圓心位於方框中心; // 圓心位於方框中心; // 圓心位於方框中心; // 圓心位於方框中心
-    }    }    }    }    }
+      graphics.fill(col);
+      graphics.noStroke();
+      graphics.ellipse(i, j, 15, 15); // 繪製圓形
+    }
   }
-
-  // 翻轉畫布以修正左右顛倒的 graphics
-  push();h();h();h();h();
-  translate(width, 0); // 將畫布的原點移到右上角ranslate(width, 0); // 將畫布的原點移到右上角ranslate(width, 0); // 將畫布的原點移到右上角ranslate(width, 0); // 將畫布的原點移到右上角ranslate(width, 0); // 將畫布的原點移到右上角
-  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布
-  image(graphics, -x - videoWidth, y, videoWidth, videoHeight);eoWidth, y, videoWidth, videoHeight);eoWidth, y, videoWidth, videoHeight);eoWidth, y, videoWidth, videoHeight);eoWidth, y, videoWidth, videoHeight);
-  pop();
 
   // 翻轉畫布以修正左右顛倒的影像
   push();
-  translate(width, 0); // 將畫布的原點移到右上角ate(width, 0); // 將畫布的原點移到右上角ate(width, 0); // 將畫布的原點移到右上角ate(width, 0); // 將畫布的原點移到右上角ate(width, 0); // 將畫布的原點移到右上角
-  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布  scale(-1, 1); // 水平翻轉畫布
-  image(video, x, y, videoWidth, videoHeight);, videoWidth, videoHeight);, videoWidth, videoHeight);, videoWidth, videoHeight);, videoWidth, videoHeight);
+  translate(width, 0); // 將畫布的原點移到右上角
+  scale(-1, 1); // 水平翻轉畫布
+  image(video, x, y, videoWidth, videoHeight);
   pop();
+
+  // 在視訊畫面上方顯示圖形
+  image(graphics, x, y, videoWidth, videoHeight);
 }
 
 function windowResized() {
-  // 當視窗大小改變時，重新調整畫布大小大小改變時，重新調整畫布大小大小改變時，重新調整畫布大小大小改變時，重新調整畫布大小大小改變時，重新調整畫布大小
-  resizeCanvas(windowWidth, windowHeight); resizeCanvas(windowWidth, windowHeight); resizeCanvas(windowWidth, windowHeight); resizeCanvas(windowWidth, windowHeight); resizeCanvas(windowWidth, windowHeight);
-  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小
+  // 當視窗大小改變時，重新調整畫布大小
+  resizeCanvas(windowWidth, windowHeight);
+  graphics.resizeCanvas(windowWidth, windowHeight); // 調整圖形緩衝區大小
 }
